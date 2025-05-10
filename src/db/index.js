@@ -7,7 +7,6 @@ const clientOptions = {
 
 const connectDB = async () => {
   try {
-    console.log(uri)
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
     console.log(
