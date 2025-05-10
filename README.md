@@ -1,6 +1,6 @@
 # Basic Activity Booking App Backend
 
-This is a simple REST API backend for an activity booking application, built using Node.js, Express.js, and MongoDB. It follows the structure of a provided boilerplate todo application.
+This is a simple REST API backend for an activity booking application, built using Node.js, Express.js, and MongoDB.
 
 ## Features
 
@@ -33,7 +33,7 @@ This is a simple REST API backend for an activity booking application, built usi
 3.  **Set up environment variables:**
     Create a `.env` file in the root directory and add the following environment variables:
     ```env
-    PORT=5000 # or any port you prefer
+    PORT=8080 # or any port you prefer
     MONGODB_URI=<Your MongoDB connection string>
     CORS_ORIGIN=* # Or specific origins, e.g., http://localhost:3000
     ACCESS_TOKEN_SECRET=<Your JWT access token secret>
