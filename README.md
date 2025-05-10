@@ -21,7 +21,7 @@ This is a simple REST API backend for an activity booking application, built usi
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/satendragangwar/Activity_booking.git
     cd Activity_booking
     ```
 
