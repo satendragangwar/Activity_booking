@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "123457890",
+    "name": "MeetX Assignment",
+    "description": "Postman collection for the MeetX Assignment backend API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_newlyImported": true,
+    "_deprecated_auth": {
+      "type": "bearer"
+    },
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:8080/api/v1",
+        "type": "string"
+      },
+      {
+        "key": "accessToken",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "User Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"1234567890\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.environment.set(\"accessToken\", jsonData.data.accessToken);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": [
+        {
+          "name": "List Activities (Public)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/activities?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["activities"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination (optional)"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page (optional)"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Book Activity (Authorized)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activityId\": \"replace_with_activity_id\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings"]
+            },
+            "description": "Requires a valid activity ID from the List Activities endpoint."
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Bookings (Authorized)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/my-bookings?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings", "my-bookings"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination (optional)"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of items per page (optional)"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
